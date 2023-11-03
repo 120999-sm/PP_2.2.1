@@ -16,7 +16,7 @@ public class UserServiceImp implements UserService {
    @Autowired
    private UserDao userDao;
 
-   @Transactional
+   @Transactional//todo: выносим @Transactional - над классом, где необходимо над методами - параметризуем: @Transactional(readOnly = true)
    @Override
    public void add(User user) {
       userDao.add(user);
