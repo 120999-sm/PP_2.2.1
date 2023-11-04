@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImp implements UserService {
 
    @Autowired
    private UserDao userDao;
 
-   @Transactional//todo: выносим @Transactional - над классом, где необходимо над методами - параметризуем: @Transactional(readOnly = true)
    @Override
    public void add(User user) {
       userDao.add(user);
@@ -28,7 +28,8 @@ public class UserServiceImp implements UserService {
       return userDao.listUsers();
    }
 
-   @Transactional
+   @Transactional(readOnly = true)
+   @Override
    public  List<User> getUserByModelAndSeriesOfCar(String model, int series) { return userDao.getUserByModelAndSeriesOfCar(model, series); }
 
 }
